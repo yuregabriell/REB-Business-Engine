@@ -1,0 +1,14 @@
+{
+  "servers": {
+    "rea": {
+      "command": ["/absolute/path/to/configured-rea-mcp"],
+      "allowed_tools": {}
+    },
+    "local-test": {
+      "command": ["python", "-m", "reb.mcp_stdio"],
+      "allowed_tools": {
+        "reb_list_projects": "read"
+      }
+    }
+  }
+}

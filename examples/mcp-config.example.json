@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "reb": {
+      "command": "reb-mcp",
+      "env": {
+        "REB_DB_PATH": "/replace/with/absolute/path/reb.sqlite3"
+      }
+    }
+  }
+}

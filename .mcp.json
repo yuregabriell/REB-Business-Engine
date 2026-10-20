@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "reb": {
+      "command": "reb-mcp"
+    }
+  }
+}

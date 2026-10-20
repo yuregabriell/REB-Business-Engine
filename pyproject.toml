@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "reb-business-engine"
+version = "0.3.0"
+description = "REB — Reverse Engineering Business: evidence-led adaptive business agent toolkit"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{name = "REB Project Contributors"}]
+license = "MIT"
+keywords = ["business", "agents", "mcp", "skills", "entrepreneurship", "research"]
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=8.0", "pytest-cov>=5.0"]
+
+[project.scripts]
+reb = "reb.cli:main"
+reb-mcp = "reb.mcp_stdio:main"
+reb-remote = "reb.remote:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.setuptools.package-data]
+reb = ["web/*.html", "web/*.css", "web/*.js"]

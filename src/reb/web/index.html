@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="pt"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>REB Studio — Business Intelligence</title><link rel="stylesheet" href="/styles.css"></head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="mark">R</div><div><strong>REB Studio</strong><small>BUSINESS INTELLIGENCE</small></div></div>
+    <p class="navlabel">ESPAÇO DE TRABALHO</p>
+    <button class="nav active" data-go="overview">◈ <span>Visão geral</span></button>
+    <button class="nav" data-go="plan">◎ <span>Plano de ação</span></button>
+    <button class="nav" data-go="research">⌕ <span>Evidências</span></button>
+    <button class="nav" data-go="experiments">◇ <span>Experiências</span></button>
+    <button class="nav" data-go="finance">▥ <span>Finanças</span></button>
+    <button class="nav" data-go="journal">☰ <span>Business Journey</span></button>
+    <button class="nav" data-go="agents">✳ <span>Especialistas</span></button>
+    <div class="aside-end"><span class="dot"></span> Motor REB local <small>v0.2.0 · Desenvolvimento</small></div>
+  </aside>
+  <main>
+    <header><div><p class="eyebrow">CENTRO DE INTELIGÊNCIA</p><h1 id="pageTitle">Visão geral</h1></div><div class="header-end"><label class="project-select">Projeto<select id="projectSelect"><option value="">Seleciona um projeto</option></select></label><button id="newProject" class="primary">+ Novo projeto</button></div></header>
+    <div class="notice">Os indicadores refletem dados registados, não resultados verificados externamente. O REB não garante sucesso comercial.</div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <section id="overview" class="tab">
+      <div class="intro"><p class="eyebrow">FOCO NO QUE IMPORTA</p><h2>Da ideia ao negócio, com decisões baseadas em evidências.</h2><p>Investiga, experimenta, regista resultados reais e evolui ao longo do caminho.</p></div>
+      <div id="noProject" class="empty">Ainda não tens um projeto selecionado. Cria um projeto para começar.</div>
+      <div id="overviewContent" hidden>
+        <div class="stats"><article><span>Evidências registadas</span><strong id="statEvidence">0</strong></article><article><span>Experiências</span><strong id="statExperiments">0</strong></article><article><span>Receita declarada</span><strong id="statRevenue">0 €</strong></article><article><span>Custos declarados</span><strong id="statCost">0 €</strong></article></div>
+        <div class="columns"><article class="panel"><p class="eyebrow">PROJETO</p><h3 id="projectName">—</h3><p id="projectIdea">—</p><dl><div><dt>Mercado</dt><dd id="projectMarket">—</dd></div><div><dt>Etapa</dt><dd id="projectStage">—</dd></div><div><dt>Orçamento registado</dt><dd id="projectBudget">—</dd></div></dl></article>
+        <article class="panel"><p class="eyebrow">PRÓXIMAS AÇÕES</p><h3>Prioridades do REB</h3><ol id="nextActions"></ol></article></div>
+      </div>
+    </section>
+    <section id="plan" class="tab" hidden>
+      <p class="eyebrow">PLANO ORIENTADO POR EVIDÊNCIAS</p><h2>O que fazer a seguir</h2>
+      <p>As tarefas são sugestões baseadas na fase do projeto, não ações executadas automaticamente.</p>
+      <div class="columns"><article class="panel"><h3>Próximas etapas</h3><div id="planTasks" class="records"></div></article>
+      <article class="panel"><h3>Métodos e estudos aplicáveis</h3><div id="planMethods" class="records"></div></article></div>
+      <p class="notice" id="planWarning">Fontes indicativas devem ser revistas antes de decisões comerciais.</p>
+    </section>
+    <section id="research" class="tab" hidden><div class="section-heading"><div><p class="eyebrow">INTELIGÊNCIA DE MERCADO</p><h2>Biblioteca de evidências</h2><p>Regista hipóteses, inferências e informações verificadas com fontes.</p></div></div>
+      <div class="columns"><form id="evidenceForm" class="panel"><h3>Nova evidência</h3><label>O que sabemos ou estamos a testar?<textarea name="claim" required rows="4" placeholder="Ex.: Concorrente anuncia recolha em domicílio"></textarea></label><label>Fonte pública (URL)<input name="url" type="url" placeholder="https://..."></label><label>Classificação<select name="status"><option value="unverified">Não verificada</option><option value="inferred">Inferência</option><option value="verified">Revista com fonte</option><option value="contradicted">Contraditada</option></select></label><button class="primary" type="submit">Guardar evidência</button></form><article class="panel"><h3>Registos do projeto</h3><div id="evidenceList" class="records"></div></article></div>
+    </section>
+    <section id="experiments" class="tab" hidden><p class="eyebrow">VALIDAÇÃO</p><h2>Experiências mensuráveis</h2><p>Antes de investir, define aquilo que precisas de comprovar e como medir.</p><div class="columns"><form id="experimentForm" class="panel"><h3>Criar experiência</h3><label>Hipótese<textarea name="hypothesis" required rows="3" placeholder="Os clientes estão dispostos a pagar por..."></textarea></label><label>Métrica<input name="metric" required placeholder="N.º de pré-vendas pagas"></label><label>Critério de sucesso<input name="target" required placeholder="Pelo menos 3 pagamentos reais"></label><label>Orçamento máximo (€)<input name="cap" type="number" min="0" step="0.01" value="0"></label><button class="primary">Guardar experiência</button></form><article class="panel"><h3>Experiências registadas</h3><div id="experimentList" class="records"></div></article></div></section>
+    <section id="finance" class="tab" hidden><p class="eyebrow">UNIT ECONOMICS</p><h2>Simulador financeiro</h2><p>Usa os teus próprios valores para calcular a margem e o ponto de equilíbrio. Não são previsões.</p><div class="columns"><form id="financeForm" class="panel"><h3>Premissas do cenário</h3><div class="formgrid"><label>Preço por venda<input name="price" type="number" min="0" step="0.01" value="40" required></label><label>Custo variável por venda<input name="variable" type="number" min="0" step="0.01" value="12" required></label><label>Custos fixos no período<input name="fixed" type="number" min="0" step="0.01" value="200" required></label><label>Vendas no período<input name="units" type="number" min="0" step="1" value="10" required></label><label>Aquisição por venda<input name="cac" type="number" min="0" step="0.01" value="3"></label><label>Caixa disponível<input name="cash" type="number" min="0" step="0.01" value="800"></label></div><button class="primary">Calcular cenário</button></form><article class="panel"><h3>Resultado estimado</h3><div id="financeResult" class="records muted">Introduz as premissas e calcula.</div></article></div></section>
+    <section id="journal" class="tab" hidden><p class="eyebrow">REB BUSINESS JOURNEY</p><h2>O diário empresarial</h2><p>Regista decisões, experiências e o que realmente aconteceu.</p><div class="columns"><form id="journalForm" class="panel"><h3>Nova entrada</h3><label>Tipo<select name="kind"><option value="activity">Atividade</option><option value="decision">Decisão</option><option value="result">Resultado</option><option value="lesson">Aprendizagem</option></select></label><label>O que aconteceu?<textarea name="body" rows="4" required placeholder="Hoje contactei três potenciais clientes..."></textarea></label><div class="formgrid"><label>Receita (€)<input name="revenue" type="number" min="0" step="0.01" value="0"></label><label>Custo (€)<input name="cost" type="number" min="0" step="0.01" value="0"></label><label>Clientes<input name="customers" type="number" min="0" step="1" value="0"></label></div><button class="primary">Guardar no diário</button></form><article class="panel"><h3>Histórico</h3><div id="journalList" class="records"></div></article></div></section>
+    <section id="agents" class="tab" hidden><p class="eyebrow">EQUIPA DE ESPECIALISTAS</p><h2>14 papéis, um objetivo</h2><p>O modelo de IA anfitrião carrega especialistas conforme a necessidade. Este painel mostra as funções, não sessões de agentes a executar.</p><div id="agentGrid" class="agent-grid"></div></section>
+  </main>
+</div>
+<dialog id="projectDialog"><form id="projectForm"><div class="dialoghead"><div><p class="eyebrow">NOVO COMEÇO</p><h2>Criar projeto empresarial</h2></div><button id="closeDialog" type="button" class="ghost">✕</button></div><label>Nome do projeto<input name="name" required placeholder="Ex.: Lavandaria à porta"></label><label>Descreve a ideia<textarea name="idea" rows="4" required placeholder="Mesmo que seja uma ideia inicial, escreve como imaginas..."></textarea></label><div class="formgrid"><label>Mercado<input name="market" value="Portugal" required></label><label>Orçamento (€)<input name="budget" type="number" min="0" step="0.01" value="0"></label></div><label>Etapa<select name="stage"><option value="idea">Só uma ideia</option><option value="validation">Validação</option><option value="launch">Lançamento</option><option value="operating">Em operação</option><option value="scaling">Expansão</option></select></label><button class="primary" type="submit">Criar projeto</button></form></dialog>
+<script src="/app.js" defer></script>
+</body></html>
